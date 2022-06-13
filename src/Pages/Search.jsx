@@ -2,11 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { primary, secondary } from '../Styles/Colors';
 import { useRef } from 'react';
-import * as SearchActions from '../Redux/Search/search-actions';
+import { searchForMovie } from '../Redux/Search/search-reducer';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { ResultsCards } from '../Components/ResultsCards';
+import { Score } from '../Components/Score';
+import { useOpenPopup } from '../Hooks/useOpenPopup';
 
 export const Search = () => {
+	const openedPopup = useOpenPopup();
+
 	const dispatch = useDispatch();
 
 	const enterHandler = (e) => {
@@ -16,32 +21,34 @@ export const Search = () => {
 	const busqueda = useRef();
 
 	const handleSubmit = () => {
-		dispatch(SearchActions.searchMovie(busqueda.current.value));
+		dispatch(searchForMovie(busqueda.current.value));
 	};
 
-	const searchResults = useSelector((state) => state.search.search);
-	console.log(searchResults);
-
-	const pepe = searchResults.then((data) => {
-		console.log(data);
-	});
+	const { search } = useSelector((state) => state.search.search);
 
 	return (
-		<MainContainer>
-			<Container>
-				<Input
-					type="text"
-					ref={busqueda}
-					onKeyUp={enterHandler}
-				></Input>
-				<Button onClick={handleSubmit}>Buscar</Button>
-			</Container>
-			<ListadoCards>
-				{pepe.map((item) => (
-					<div item={item} key={item.id}></div>
-				))}
-			</ListadoCards>
-		</MainContainer>
+		<>
+			<MainContainer>
+				<Score {...openedPopup}></Score>
+				<Container>
+					<Input
+						type="text"
+						ref={busqueda}
+						onKeyUp={enterHandler}
+					></Input>
+					<Button onClick={handleSubmit}>Buscar</Button>
+				</Container>
+				<ListadoCards>
+					{search?.map((item) => (
+						<ResultsCards
+							item={item}
+							key={item.id}
+							{...openedPopup}
+						></ResultsCards>
+					))}
+				</ListadoCards>
+			</MainContainer>
+		</>
 	);
 };
 
@@ -49,7 +56,7 @@ const MainContainer = styled.div`
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
-	max-width: 1400px;
+	max-width: 1500px;
 	justify-content: center;
 	align-items: center;
 	padding: 30px 0px;
@@ -71,13 +78,14 @@ const Input = styled.input`
 
 const ListadoCards = styled.div`
 	display: grid;
-	grid-template-columns: auto;
-	margin: 15px 0px;
-	gap: 5px;
-	width: 1400px;
+	/* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
+	grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+	margin: 50px 0px;
+	gap: 20px;
+	width: 1500px;
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
 	background-color: ${secondary};
 	border: none;
 	padding: 10px 40px;

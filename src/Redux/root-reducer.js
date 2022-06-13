@@ -2,18 +2,18 @@ import { combineReducers } from 'redux';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
-import viewsReducer from './Views/views-reducer';
-import searchReducer from './Search/search-reducer';
+import { searchReducer } from './Search/search-reducer';
+import { viewsReducer } from './Views/views-reducer';
 
 const persistConfig = {
 	key: 'root',
 	storage: storage,
-	whitelist: ['cart'],
+	whitelist: ['views'],
 };
 
 const rootReducer = combineReducers({
-	views: viewsReducer,
 	search: searchReducer,
+	views: viewsReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

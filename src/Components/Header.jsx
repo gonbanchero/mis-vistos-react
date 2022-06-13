@@ -13,7 +13,7 @@ export const Header = () => {
 	// const [open, setOpen] = React.useState(false);
 	// const handleOpen = () => setOpen(true);
 	// const handleClose = () => setOpen(false);
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	// const busqueda = useRef();
 
@@ -39,8 +39,9 @@ export const Header = () => {
 					{thisLocation.pathname === '/' ? (
 						<PlusIcon
 							style={{ fill: '#7DDFEE', cursor: 'pointer' }}
-
-							// onClick={() => {
+							onClick={() => {
+								navigate('/search');
+							}}
 							// 	if (views.length === 0) {
 							// 		handleOpen();
 							// 	} else navigate('/agregar');
@@ -49,6 +50,9 @@ export const Header = () => {
 					) : (
 						<HomeIcon
 							style={{ fill: '#7DDFEE', cursor: 'pointer' }}
+							onClick={() => {
+								navigate('/');
+							}}
 
 							// onClick={() => {
 							// 	navigate('/');

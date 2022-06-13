@@ -9,8 +9,11 @@ La app guardará un registro de todas las películas o series que mires.
 
 // Falta:
 
-1. Cuando hago click en + por primera vez que me salte el prompt para ingresar el AlisScore y guardarlo en el contexto.
+1. Después de puntar, chequea si ya está agregada la movie. Chequear antes, y si esta agregada preguntar si quiere actualizar el score.
+1. Conectar otra api call para imprimir donde puede verse el título que se guardo.
+   (https://developers.themoviedb.org/3/movies/get-movie-watch-providers)
+1. Conectar api de WhatsApp para compartir el título.
+1. Agregar botón en popup score -> Agregar y Salir o Agregar y seguir Agregando.
+1. Conectar todo con Firebase para persistir data y usuarios.
 
 // Hacer:
-
-Ver como hacer para guardar en el localstorage el array de estadoinicial entero y no por separado para persistir el array y que lo tome tanto en home como en agregar. Esto básicamente para que persista el valor alias asi no muestra el popup cuando haces click en el botón y ya seteaste el alias.
