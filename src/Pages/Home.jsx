@@ -25,11 +25,36 @@ export const Home = () => {
 					</WelcomeText>
 				</WelcomeContainer>
 			) : (
-				<ListadoCards>
-					{viewedMovies?.map((item) => (
-						<ViewedCards item={item} key={item.id}></ViewedCards>
-					))}
-				</ListadoCards>
+				<>
+					<Container>
+						<TypeTitle>Series</TypeTitle>
+						<Divider />
+						<ListadoCards>
+							{viewedMovies
+								?.filter((item) => item.media_type === 'tv')
+								.map((item) => (
+									<ViewedCards
+										item={item}
+										key={item.id}
+									></ViewedCards>
+								))}
+						</ListadoCards>
+					</Container>
+					<Container>
+						<TypeTitle>Películas</TypeTitle>
+						<Divider />
+						<ListadoCards>
+							{viewedMovies
+								?.filter((item) => item.media_type === 'movie')
+								.map((item) => (
+									<ViewedCards
+										item={item}
+										key={item.id}
+									></ViewedCards>
+								))}
+						</ListadoCards>
+					</Container>
+				</>
 			)}
 		</>
 	);
@@ -40,8 +65,9 @@ const ListadoCards = styled.div`
 	grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
 	margin: 0px auto;
 	padding: 50px 0px;
-	gap: 7px;
-	max-width: 1400px;
+	gap: 40px;
+	max-width: 1500px;
+	width: auto;
 `;
 
 const WelcomeContainer = styled.div`
@@ -64,4 +90,22 @@ const WelcomeText = styled.p`
 	color: #fff;
 	text-align: center;
 	line-height: 2rem;
+`;
+
+const Container = styled.div`
+	margin: 0 auto;
+	padding-top: 40px;
+	max-width: 1400px;
+	display: flex;
+	flex-direction: column;
+`;
+
+const TypeTitle = styled.h2`
+	color: #fff;
+	margin-bottom: 5px;
+`;
+
+const Divider = styled.div`
+	height: 1px;
+	background-color: #aaaaaa;
 `;

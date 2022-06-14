@@ -35,6 +35,7 @@ export const Search = () => {
 						type="text"
 						ref={busqueda}
 						onKeyUp={enterHandler}
+						autoFocus
 					></Input>
 					<Button onClick={handleSubmit}>Buscar</Button>
 				</Container>

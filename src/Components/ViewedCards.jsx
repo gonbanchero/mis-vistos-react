@@ -58,9 +58,15 @@ export const ViewedCards = (item) => {
 
 			<Footer>
 				<Button key={item.item.id}>Compartir</Button>
-				<Button>
-					<Link to={`/movie/${item.item.id}`}>Ver Más</Link>
-				</Button>
+				{item.item.media_type === 'movie' ? (
+					<Button>
+						<Link to={`/movie/${item.item.id}`}>Ver Más</Link>
+					</Button>
+				) : (
+					<Button>
+						<Link to={`/tv/${item.item.id}`}>Ver Más</Link>
+					</Button>
+				)}
 			</Footer>
 		</Card>
 	);

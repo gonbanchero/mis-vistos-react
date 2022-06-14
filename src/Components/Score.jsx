@@ -18,22 +18,37 @@ export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 	const score = useRef();
 
 	const handleScore = (openPopup) => {
-		console.log(score.current.value);
-		console.log(openPopup);
-
-		const existingViewedMovie = viewedMovies.find(
-			(viewed) => viewed.id === openPopup.id
-		);
-
-		existingViewedMovie
-			? alert('ya está agregada')
-			: dispatch(viewedMovie(openPopup, score.current.value));
+		dispatch(viewedMovie(openPopup, score.current.value));
 		setOpenPopup();
 		navigate('/');
 	};
 
+	const handleScoreStay = (openPopup) => {
+		dispatch(viewedMovie(openPopup, score.current.value));
+		setOpenPopup();
+	};
+
+	const handleUpdateScore = (openPopup) => {
+		dispatch(viewedMovie(openPopup, score.current.value));
+		setOpenPopup();
+		navigate('/');
+	};
+
+	const handleUpdateScoreStay = (openPopup) => {
+		dispatch(viewedMovie(openPopup, score.current.value));
+		setOpenPopup();
+	};
+
 	const handleClose = () => {
 		setOpenPopup();
+	};
+
+	// EVALUA SI ITEM ELEGIDO ESTÁ YA CARGADO EN LOS VISTOS CON EL RETURN SE HACE LA CONDICIÓN EN EL COMPONENTE Y MUESTRA 2 INFOS DIFERENTES EN EL POPUP
+	const printConditionViewed = (viewedMovies) => {
+		const existingViewedMovie = viewedMovies.find(
+			(viewed) => viewed.id === openPopup.id
+		);
+		return existingViewedMovie;
 	};
 
 	return (
@@ -41,29 +56,77 @@ export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 			<DialogShadow onClick={handleClose} />
 			<PopupContainer>
 				<Close>
-					<CloseIcon style={{ cursor: 'pointer' }}></CloseIcon>
+					<CloseIcon
+						style={{ cursor: 'pointer' }}
+						onClick={handleClose}
+					></CloseIcon>
 				</Close>
-				<Title>{openPopup.name || openPopup.original_title}</Title>
-				<Text>
-					¿Qué puntaje te gustaría ponerle a "
-					{openPopup.name || openPopup.original_title}"?
-				</Text>
-				<InputContainer>
-					<Input ref={score}>
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-					</Input>
-					<Button
-						onClick={() => {
-							handleScore(openPopup);
-						}}
-					>
-						Enviar
-					</Button>
-				</InputContainer>
+
+				{printConditionViewed(viewedMovies) ? (
+					<>
+						<Title>
+							{openPopup.name || openPopup.original_title} ya está
+							agregada
+						</Title>
+						<Text>¿Te gustaría actualizar su puntaje?</Text>
+						<InputContainer>
+							<Input ref={score}>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</Input>
+							<Button
+								onClick={() => {
+									handleUpdateScore(openPopup);
+								}}
+							>
+								Actualizar y Volver
+							</Button>
+							<Button
+								onClick={() => {
+									handleUpdateScoreStay(openPopup);
+								}}
+							>
+								Actualizar y Seguir Agregando
+							</Button>
+						</InputContainer>
+					</>
+				) : (
+					<>
+						<Title>
+							{openPopup.name || openPopup.original_title}
+						</Title>
+						<Text>
+							¿Qué puntaje te gustaría ponerle a "
+							{openPopup.name || openPopup.original_title}"?
+						</Text>
+						<InputContainer>
+							<Input ref={score}>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</Input>
+							<Button
+								onClick={() => {
+									handleScore(openPopup);
+								}}
+							>
+								Agregar y Volver
+							</Button>
+							<Button
+								onClick={() => {
+									handleScoreStay(openPopup);
+								}}
+							>
+								Agregar y seguir buscando
+							</Button>
+						</InputContainer>
+					</>
+				)}
 			</PopupContainer>
 		</>
 	);
