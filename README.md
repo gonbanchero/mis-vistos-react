@@ -17,3 +17,4 @@ La app guardará un registro de todas las películas o series que mires.
 1. Conectar todo con Firebase para persistir data y usuarios.
 
 // Hacer:
+adas
