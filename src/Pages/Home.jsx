@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { ViewedCards } from '../Components/ViewedCards';
+import { Link } from 'react-router-dom';
 
 export const Home = () => {
 	const viewedMovies = useSelector((state) => state.views.views);

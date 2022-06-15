@@ -5,6 +5,15 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as StarIcon } from '../img/star.svg';
 
 export const ViewedCards = (item) => {
+	const handleWsp = () => {
+		window.open(
+			`https://api.whatsapp.com/send?text=Te recomiendo que mires "${
+				item.item.name || item.item.original_title
+			}".%0AYo le puse ${item.item.puntaje} puntos.`,
+			'_self'
+		);
+	};
+
 	return (
 		<Card>
 			{item.item.backdrop_path === undefined ? (
@@ -57,7 +66,9 @@ export const ViewedCards = (item) => {
 			</Info>
 
 			<Footer>
-				<Button key={item.item.id}>Compartir</Button>
+				<Button key={item.item.id} onClick={handleWsp}>
+					Compartir
+				</Button>
 				{item.item.media_type === 'movie' ? (
 					<Button>
 						<Link to={`/movie/${item.item.id}`}>Ver Más</Link>
@@ -117,6 +128,7 @@ const Footer = styled.div`
 const Button = styled.div`
 	color: #fff;
 	font-size: 13px;
+	cursor: pointer;
 `;
 
 const Score = styled.div`

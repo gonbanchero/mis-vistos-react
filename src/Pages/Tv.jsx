@@ -48,9 +48,22 @@ export const Tv = () => {
 				</Fecha>
 				<Platform>
 					Podés verla en:
-					{tv?.networks.map((platform) => (
-						<p key={platform.id}>- {platform.name}</p>
-					))}
+					<PlatformImgContainer>
+						{tv?.networks.map((platform) => (
+							<PlatformImg
+								src={
+									'https://image.tmdb.org/t/p/w500' +
+									platform?.logo_path
+								}
+								srcSet={
+									'https://image.tmdb.org/t/p/w500' +
+									platform?.logo_path
+								}
+								alt={platform?.original_title}
+								loading="lazy"
+							></PlatformImg>
+						))}
+					</PlatformImgContainer>
 				</Platform>
 				<Reseña>{tv?.overview}</Reseña>
 				<Button size="small" onClick={() => navigate(-1)}>
@@ -119,4 +132,22 @@ const Button = styled.button`
 const Platform = styled.div`
 	color: #fff;
 	text-align: center;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	margin-bottom: 15px;
+`;
+
+const PlatformImgContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	background-color: #fff;
+	padding: 15px;
+`;
+
+const PlatformImg = styled.img`
+	width: 100px;
 `;

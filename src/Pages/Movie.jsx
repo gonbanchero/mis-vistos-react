@@ -7,7 +7,6 @@ import { primary } from '../Styles/Colors';
 
 export const Movie = () => {
 	const [movie, setMovie] = useState();
-	const [platform, setPlatform] = useState();
 	const { id } = useParams();
 
 	useEffect(() => {
@@ -20,18 +19,6 @@ export const Movie = () => {
 		fetch();
 	}, []);
 
-	useEffect(() => {
-		const fetch = async () => {
-			const response = await axios.get(
-				`https://api.themoviedb.org/3/movie/${id}/watch/providers?api_key=3907f1e02c5af5a6eb040f19d19e5a97&language=es`
-			);
-			setPlatform(response.data);
-		};
-		fetch();
-	}, []);
-
-	console.log(platform);
-	console.log(movie);
 	const navigate = useNavigate();
 
 	return (
@@ -57,12 +44,6 @@ export const Movie = () => {
 			<Derecha>
 				<Titulo>{movie?.original_title || movie?.name}</Titulo>
 				<Fecha>Fecha de estreno: {movie?.release_date}</Fecha>
-				{/* <Platform>
-					Podés verla en:
-					{movie.networks.map((platform) => (
-						<p key={platform.id}>- {platform.name}</p>
-					))}
-				</Platform> */}
 				<Reseña>{movie?.overview}</Reseña>
 				<Button size="small" onClick={() => navigate(-1)}>
 					Volver

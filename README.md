@@ -9,12 +9,5 @@ La app guardará un registro de todas las películas o series que mires.
 
 // Falta:
 
-1. Conectar otra api call para imprimir donde puede verse el título que se guardo.
-   (https://developers.themoviedb.org/3/movies/get-movie-watch-providers)
-1. Conectar api de WhatsApp para compartir el título.
-1. Conectar todo con Firebase para persistir data y usuarios.
-
-1. En movies ver que traiga networks (no encontre la forma) pero si no hay sacar el useeffect que muestra eso
-1. En tv mostrar el logo de la plataforma y no el nombre.
-
-// Hacer:
+1. Hacerla responsive
+2. Conectar todo con Firebase para persistir data y usuarios.
