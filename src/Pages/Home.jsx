@@ -7,7 +7,7 @@ import { devices } from '../Styles/breakpoints/responsive';
 
 export const Home = () => {
 	const viewedMovies = useSelector((state) => state.views.views);
-	console.log(viewedMovies);
+	// console.log(viewedMovies);
 
 	return (
 		<>

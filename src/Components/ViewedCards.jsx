@@ -14,7 +14,7 @@ export const ViewedCards = (item) => {
 			'_self'
 		);
 	};
-	console.log(item);
+	// console.log(item);
 
 	return (
 		<Card>

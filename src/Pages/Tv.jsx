@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Imagen from '../img/contemplative-reptile.jpg';
 import { primary } from '../Styles/Colors';
+import { devices } from '../Styles/breakpoints/responsive';
 
 export const Tv = () => {
 	const [tv, setTv] = useState();
@@ -26,9 +27,9 @@ export const Tv = () => {
 		<Container>
 			<Izquierda>
 				{tv?.poster_path === undefined ? (
-					<img src={Imagen} alt={tv?.original_title}></img>
+					<Img src={Imagen} alt={tv?.original_title}></Img>
 				) : (
-					<img
+					<Img
 						src={
 							'https://image.tmdb.org/t/p/w500' + tv?.poster_path
 						}
@@ -78,9 +79,20 @@ const Container = styled.section`
 	margin: 0 auto;
 	padding: 60px 0px;
 	display: flex;
-
 	max-width: 1500px;
-	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+
+	@media ${devices.laptop} {
+		flex-direction: column;
+		width: 100%;
+		justify-content: center;
+		align-items: center;
+	}
+	@media ${devices.laptopL} {
+		width: 100%;
+	}
 `;
 
 const Izquierda = styled.div`
@@ -88,6 +100,23 @@ const Izquierda = styled.div`
 	padding: 20px;
 	display: flex;
 	justify-content: center;
+	@media ${devices.laptop} {
+		width: 100%;
+		padding: 0;
+	}
+	@media ${devices.laptopL} {
+		padding: 0;
+	}
+`;
+
+const Img = styled.img`
+	@media ${devices.laptop} {
+		width: 100%;
+	}
+	@media ${devices.laptopL} {
+		width: 70%;
+		padding: 0;
+	}
 `;
 
 const Derecha = styled.div`
@@ -96,6 +125,13 @@ const Derecha = styled.div`
 	padding: 80px;
 	display: flex;
 	flex-direction: column;
+	@media ${devices.laptop} {
+		width: 100%;
+		padding: 40px 0px;
+	}
+	@media ${devices.laptopL} {
+		padding: 50px;
+	}
 `;
 
 const Titulo = styled.h1`

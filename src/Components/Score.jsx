@@ -2,9 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { viewedMovie } from '../Redux/Views/views-reducer';
-import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../Pages/Search';
 import { ReactComponent as CloseIcon } from '../img/close.svg';
 import { useSelector } from 'react-redux';
 import { devices } from '../Styles/breakpoints/responsive';
@@ -13,15 +11,14 @@ import { devices } from '../Styles/breakpoints/responsive';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
+import { primary } from '../Styles/Colors';
 
 export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const viewedMovies = useSelector((state) => state.views.views);
-	console.log(viewedMovies);
-
-	const score = useRef();
+	// console.log(viewedMovies);
 
 	const handleScore = (openPopup) => {
 		dispatch(viewedMovie(openPopup, value));
@@ -66,7 +63,7 @@ export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 	const [value, setValue] = React.useState(2);
 	const [hover, setHover] = React.useState(-1);
 
-	console.log(value);
+	// console.log(value);
 
 	// EVALUA SI ITEM ELEGIDO ESTÁ YA CARGADO EN LOS VISTOS CON EL RETURN SE HACE LA CONDICIÓN EN EL COMPONENTE Y MUESTRA 2 INFOS DIFERENTES EN EL POPUP
 	const printConditionViewed = (viewedMovies) => {
@@ -211,7 +208,7 @@ export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 
 export const Score = (props) => {
 	if (!props.openPopup) return null;
-	console.log(props.openPopup);
+	// console.log(props.openPopup);
 
 	return <ScorePopup {...props} />;
 };
@@ -282,8 +279,11 @@ export const DialogShadow = styled.div`
 	z-index: 4;
 `;
 
-const ButtonScore = styled(Button)`
+const ButtonScore = styled.button`
 	padding: 7px;
+	border: 0;
+	background-color: ${primary};
+	cursor: pointer;
 `;
 
 const ButtonContainer = styled.div`

@@ -24,7 +24,7 @@ export const viewedMovie = (movieToAdd, scoretoAdd) => (dispatch) => {
 };
 
 const handleViewedMovie = (state, payload) => {
-	console.log(state, payload);
+	// console.log(state, payload);
 	const existingViewedMovie = state.find(
 		(viewed) => viewed.id === payload.id
 	);
