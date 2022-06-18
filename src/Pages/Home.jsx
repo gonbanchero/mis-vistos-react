@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { ViewedCards } from '../Components/ViewedCards';
 import { Link } from 'react-router-dom';
+import { devices } from '../Styles/breakpoints/responsive';
 
 export const Home = () => {
 	const viewedMovies = useSelector((state) => state.views.views);
@@ -63,22 +64,29 @@ export const Home = () => {
 
 const ListadoCards = styled.div`
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-	margin: 0px auto;
-	padding: 50px 0px;
-	gap: 40px;
-	max-width: 1500px;
+	counter-reset: grid-items;
+	position: relative;
+	grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+	margin: 50px 0px;
+	gap: 3%;
+	max-width: 1900px;
+	width: 100%;
+	box-sizing: border-box;
 	width: auto;
 `;
 
 const WelcomeContainer = styled.div`
 	margin: 0 auto;
-	padding: 50px 0px;
+	padding: 50px 100px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	max-width: 800px;
+	@media ${devices.tablet} {
+		width: auto;
+		padding: 50px 30px;
+	}
 `;
 
 const WelcomeTitle = styled.h2`
@@ -95,10 +103,14 @@ const WelcomeText = styled.p`
 
 const Container = styled.div`
 	margin: 0 auto;
-	padding-top: 40px;
-	max-width: 1400px;
+	padding: 2% 10%;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
+	box-sizing: border-box;
+	@media ${devices.tablet} {
+		padding: 5% 10% 30% 10%;
+	}
 `;
 
 const TypeTitle = styled.h2`

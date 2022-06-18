@@ -9,5 +9,5 @@ La app guardará un registro de todas las películas o series que mires.
 
 // Falta:
 
-1. Hacerla responsive
+1. Hacerla responsive -> el menú mobile abajo
 2. Conectar todo con Firebase para persistir data y usuarios.

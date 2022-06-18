@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Imagen from '../img/contemplative-reptile.jpg';
 import { useDispatch } from 'react-redux';
+import { devices } from '../Styles/breakpoints/responsive';
+import { Link } from 'react-router-dom';
 
 export const ResultsCards = (props) => {
 	const dispatch = useDispatch();
@@ -9,6 +11,7 @@ export const ResultsCards = (props) => {
 	const handleAdd = (item) => {
 		props.setOpenPopup(item);
 	};
+
 	return (
 		<Card>
 			{props.item.backdrop_path === undefined ? (
@@ -32,24 +35,41 @@ export const ResultsCards = (props) => {
 				>
 					Agregar
 				</Button>
-				<Button>Ver Más</Button>
+				<Button>
+					{props.item.media_type === 'movie' ? (
+						<Button>
+							<Link to={`/movie/${props.item.id}`}>Ver Más</Link>
+						</Button>
+					) : (
+						<Button>
+							<Link to={`/tv/${props.item.id}`}>Ver Más</Link>
+						</Button>
+					)}
+				</Button>
 			</Footer>
 		</Card>
 	);
 };
 
 const Card = styled.div`
-	max-width: 270px;
+	counter-increment: grid-item;
+	width: 100%;
 	height: auto;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
+	align-self: center;
+	margin-bottom: 30px;
+
+	@media ${devices.tablet} {
+		margin-bottom: 10px;
+	}
 `;
 
 const Img = styled.img`
-	max-width: 271px;
+	width: 100%;
 	border-radius: 10px 10px 0px 0px;
 `;
 
@@ -75,4 +95,6 @@ const Footer = styled.div`
 const Button = styled.div`
 	color: #fff;
 	font-size: 13px;
+	text-decoration: none;
+	cursor: pointer;
 `;

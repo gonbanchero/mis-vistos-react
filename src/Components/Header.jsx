@@ -1,62 +1,37 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useRef } from 'react';
 import styled from 'styled-components';
 import { headerBackground, primary } from '../Styles/Colors';
 import { Link } from 'react-router-dom';
-import { ReactComponent as PlusIcon } from '../img/add_icon.svg';
-import { ReactComponent as HomeIcon } from '../img/home.svg';
+import PlusIconImg from '../img/add_icon.svg';
+import HomeIconImg from '../img/home.svg';
+import LogoImg from '../img/LogoMV.png';
+import { devices } from '../Styles/breakpoints/responsive';
 
 export const Header = () => {
-	// const { setAlias, views } = useContext(Contexto);
-
-	// const [open, setOpen] = React.useState(false);
-	// const handleOpen = () => setOpen(true);
-	// const handleClose = () => setOpen(false);
 	const navigate = useNavigate();
-
-	// const busqueda = useRef();
-
-	// const handleSubmit = () => {
-	// 	setAlias(busqueda.current.value);
-	// 	navigate('/agregar');
-	// 	handleClose();
-	// };
-
-	// const enterHandler = (e) => {
-	// 	if (e.key === 'Enter' || e.keyCode === 13) handleSubmit();
-	// };
-
 	const thisLocation = useLocation();
 
 	return (
 		<MainContainer>
 			<MainHeader>
 				<Link to="/">
-					<Titulo>Mis Vistos</Titulo>
+					<Logo src={LogoImg} />
 				</Link>
 				<Icon>
 					{thisLocation.pathname === '/' ? (
 						<PlusIcon
-							style={{ fill: '#7DDFEE', cursor: 'pointer' }}
+							src={PlusIconImg}
 							onClick={() => {
 								navigate('/search');
 							}}
-							// 	if (views.length === 0) {
-							// 		handleOpen();
-							// 	} else navigate('/agregar');
-							// }}
 						></PlusIcon>
 					) : (
 						<HomeIcon
-							style={{ fill: '#7DDFEE', cursor: 'pointer' }}
+							src={HomeIconImg}
 							onClick={() => {
 								navigate('/');
 							}}
-
-							// onClick={() => {
-							// 	navigate('/');
-							// }}
 						></HomeIcon>
 					)}
 				</Icon>
@@ -73,6 +48,7 @@ const MainContainer = styled.div`
 	gap: 5px;
 	width: 100%;
 	background-color: ${headerBackground};
+	padding: 20px 0px;
 `;
 
 const MainHeader = styled.div`
@@ -81,12 +57,25 @@ const MainHeader = styled.div`
 	display: flex;
 	justify-items: center;
 	justify-content: space-between;
+
+	@media ${devices.laptopL} {
+		width: 1000px;
+	}
+	@media ${devices.laptop} {
+		width: 700px;
+	}
+	@media ${devices.tablet} {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+	}
 `;
 
-const Titulo = styled.h1`
-	font-size: 2.2rem;
-	text-decoration: none;
-	color: #fff;
+const Logo = styled.img`
+	width: 150px;
+	@media ${devices.tablet} {
+		width: 120px;
+	}
 `;
 
 const Icon = styled.div`
@@ -94,35 +83,16 @@ const Icon = styled.div`
 	align-items: center;
 `;
 
-{
-	/* <Modal
-					open={open}
-					onClose={handleClose}
-					aria-labelledby="modal-modal-title"
-					aria-describedby="modal-modal-description"
-				>
-					<Box sx={style}>
-						<Typography
-							id="modal-modal-title"
-							variant="h6"
-							component="h2"
-							align="center"
-						>
-							¿Qué alias le vas a poner a tus puntajes? (por
-							ejemplo "pepitos")
-						</Typography>
-						<Div>
-							<Input
-								type="text"
-								ref={busqueda}
-								onKeyUp={enterHandler}
-							></Input>
-							<Button onClick={handleSubmit}>Agregar</Button>
-						</Div>
-						{/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Duis mollis, est non commodo luctus, nisi erat
-                    porttitor ligula.
-                </Typography> 
-					</Box>
-				</Modal> */
-}
+const PlusIcon = styled.img`
+	cursor: pointer;
+	@media ${devices.tablet} {
+		display: none;
+	}
+`;
+
+const HomeIcon = styled.img`
+	cursor: pointer;
+	@media ${devices.tablet} {
+		display: none;
+	}
+`;

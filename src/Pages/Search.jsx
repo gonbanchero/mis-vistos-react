@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { ResultsCards } from '../Components/ResultsCards';
 import { Score } from '../Components/Score';
 import { useOpenPopup } from '../Hooks/useOpenPopup';
+import { devices } from '../Styles/breakpoints/responsive';
 
 export const Search = () => {
 	const openedPopup = useOpenPopup();
@@ -57,7 +58,6 @@ const MainContainer = styled.div`
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
-	max-width: 1500px;
 	justify-content: center;
 	align-items: center;
 	padding: 30px 0px;
@@ -67,6 +67,10 @@ const Container = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	@media ${devices.tablet} {
+		width: 70%;
+	}
 `;
 
 const Input = styled.input`
@@ -74,16 +78,20 @@ const Input = styled.input`
 	padding: 10px;
 	border: none;
 	border-radius: 4px;
-	width: 250px;
+	width: 450px;
 `;
 
 const ListadoCards = styled.div`
 	display: grid;
-	/* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
-	grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+	counter-reset: grid-items;
+	position: relative;
+	grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
 	margin: 50px 0px;
-	gap: 20px;
-	width: 1500px;
+	gap: 1%;
+	max-width: 1900px;
+	width: 100%;
+	padding: 0% 10%;
+	box-sizing: border-box;
 `;
 
 export const Button = styled.button`

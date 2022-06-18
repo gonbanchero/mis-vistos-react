@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Imagen from '../img/contemplative-reptile.jpg';
 import { Link } from 'react-router-dom';
 import { ReactComponent as StarIcon } from '../img/star.svg';
+import { Rating } from '@mui/material';
 
 export const ViewedCards = (item) => {
 	const handleWsp = () => {
@@ -13,6 +14,7 @@ export const ViewedCards = (item) => {
 			'_self'
 		);
 	};
+	console.log(item);
 
 	return (
 		<Card>
@@ -29,39 +31,7 @@ export const ViewedCards = (item) => {
 			<Info>
 				<Title>{item.item.name || item.item.original_title}</Title>
 				<Score>
-					{item.item.puntaje === '1' ? (
-						<StarIcon style={{ fill: '#fff' }}></StarIcon>
-					) : null}
-					{item.item.puntaje === '2' ? (
-						<>
-							<StarIcon style={{ fill: '#fff' }}></StarIcon>
-							<StarIcon style={{ fill: '#fff' }}></StarIcon>
-						</>
-					) : null}
-					{item.item.puntaje === '3' ? (
-						<>
-							<StarIcon style={{ fill: '#fff' }}></StarIcon>
-							<StarIcon style={{ fill: '#fff' }}></StarIcon>
-							<StarIcon style={{ fill: '#fff' }}></StarIcon>
-						</>
-					) : null}
-					{item.item.puntaje === '4' ? (
-						<>
-							<StarIcon style={{ fill: '#fff' }}></StarIcon>
-							<StarIcon style={{ fill: '#fff' }}></StarIcon>
-							<StarIcon style={{ fill: '#fff' }}></StarIcon>
-							<StarIcon style={{ fill: '#fff' }}></StarIcon>
-						</>
-					) : null}
-					{item.item.puntaje === '5' ? (
-						<>
-							<StarIcon style={{ fill: '#fff' }}></StarIcon>
-							<StarIcon style={{ fill: '#fff' }}></StarIcon>
-							<StarIcon style={{ fill: '#fff' }}></StarIcon>
-							<StarIcon style={{ fill: '#fff' }}></StarIcon>
-							<StarIcon style={{ fill: '#fff' }}></StarIcon>
-						</>
-					) : null}
+					<Rating value={item.item.puntaje} readOnly size="small" />
 				</Score>
 			</Info>
 
@@ -84,7 +54,8 @@ export const ViewedCards = (item) => {
 };
 
 const Card = styled.div`
-	max-width: 270px;
+	counter-increment: grid-item;
+	width: 100%;
 	height: auto;
 	border-radius: 10px;
 	display: flex;
@@ -94,7 +65,7 @@ const Card = styled.div`
 `;
 
 const Img = styled.img`
-	max-width: 271px;
+	width: 100%;
 	border-radius: 10px 10px 0px 0px;
 `;
 

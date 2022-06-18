@@ -37,5 +37,5 @@ const handleViewedMovie = (state, payload) => {
 		});
 	}
 
-	return [...state, { ...payload, cantidad: payload.puntaje }];
+	return [...state, { ...payload, puntaje: payload.puntaje }];
 };

@@ -7,6 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../Pages/Search';
 import { ReactComponent as CloseIcon } from '../img/close.svg';
 import { useSelector } from 'react-redux';
+import { devices } from '../Styles/breakpoints/responsive';
+
+// MUI
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
+import StarIcon from '@mui/icons-material/Star';
 
 export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 	const dispatch = useDispatch();
@@ -18,30 +24,49 @@ export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 	const score = useRef();
 
 	const handleScore = (openPopup) => {
-		dispatch(viewedMovie(openPopup, score.current.value));
+		dispatch(viewedMovie(openPopup, value));
 		setOpenPopup();
 		navigate('/');
 	};
 
 	const handleScoreStay = (openPopup) => {
-		dispatch(viewedMovie(openPopup, score.current.value));
+		dispatch(viewedMovie(openPopup, value));
 		setOpenPopup();
 	};
 
 	const handleUpdateScore = (openPopup) => {
-		dispatch(viewedMovie(openPopup, score.current.value));
+		dispatch(viewedMovie(openPopup, value));
 		setOpenPopup();
 		navigate('/');
 	};
 
 	const handleUpdateScoreStay = (openPopup) => {
-		dispatch(viewedMovie(openPopup, score.current.value));
+		dispatch(viewedMovie(openPopup, value));
 		setOpenPopup();
 	};
 
 	const handleClose = () => {
 		setOpenPopup();
 	};
+
+	// LÓGICA MUI STARS
+
+	const labels = {
+		1: 'Malisima',
+		2: 'Safa con pochoclos',
+		3: 'Buena',
+		4: 'Buenisima',
+		5: 'Épica',
+	};
+
+	function getLabelText(value) {
+		return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
+	}
+
+	const [value, setValue] = React.useState(2);
+	const [hover, setHover] = React.useState(-1);
+
+	console.log(value);
 
 	// EVALUA SI ITEM ELEGIDO ESTÁ YA CARGADO EN LOS VISTOS CON EL RETURN SE HACE LA CONDICIÓN EN EL COMPONENTE Y MUESTRA 2 INFOS DIFERENTES EN EL POPUP
 	const printConditionViewed = (viewedMovies) => {
@@ -70,27 +95,53 @@ export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 						</Title>
 						<Text>¿Te gustaría actualizar su puntaje?</Text>
 						<InputContainer>
-							<Input ref={score}>
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-							</Input>
-							<Button
-								onClick={() => {
-									handleUpdateScore(openPopup);
+							<Box
+								sx={{
+									width: 200,
+									display: 'flex',
+									alignItems: 'center',
 								}}
 							>
-								Actualizar y Volver
-							</Button>
-							<Button
-								onClick={() => {
-									handleUpdateScoreStay(openPopup);
-								}}
-							>
-								Actualizar y Seguir Agregando
-							</Button>
+								<Rating
+									name="hover-feedback"
+									value={value}
+									precision={1}
+									getLabelText={getLabelText}
+									onChange={(event, newValue) => {
+										setValue(newValue);
+									}}
+									onChangeActive={(event, newHover) => {
+										setHover(newHover);
+									}}
+									emptyIcon={
+										<StarIcon
+											style={{ opacity: 0.55 }}
+											fontSize="inherit"
+										/>
+									}
+								/>
+								{value !== null && (
+									<Box sx={{ ml: 2 }}>
+										{labels[hover !== -1 ? hover : value]}
+									</Box>
+								)}
+							</Box>
+							<ButtonContainer>
+								<ButtonScore
+									onClick={() => {
+										handleUpdateScore(openPopup);
+									}}
+								>
+									Actualizar y Volver
+								</ButtonScore>
+								<ButtonScore
+									onClick={() => {
+										handleUpdateScoreStay(openPopup);
+									}}
+								>
+									Agregar y buscar +
+								</ButtonScore>
+							</ButtonContainer>
 						</InputContainer>
 					</>
 				) : (
@@ -103,27 +154,53 @@ export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 							{openPopup.name || openPopup.original_title}"?
 						</Text>
 						<InputContainer>
-							<Input ref={score}>
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-							</Input>
-							<Button
-								onClick={() => {
-									handleScore(openPopup);
+							<Box
+								sx={{
+									width: 200,
+									display: 'flex',
+									alignItems: 'center',
 								}}
 							>
-								Agregar y Volver
-							</Button>
-							<Button
-								onClick={() => {
-									handleScoreStay(openPopup);
-								}}
-							>
-								Agregar y seguir buscando
-							</Button>
+								<Rating
+									name="hover-feedback"
+									value={value}
+									precision={1}
+									getLabelText={getLabelText}
+									onChange={(event, newValue) => {
+										setValue(newValue);
+									}}
+									onChangeActive={(event, newHover) => {
+										setHover(newHover);
+									}}
+									emptyIcon={
+										<StarIcon
+											style={{ opacity: 0.55 }}
+											fontSize="inherit"
+										/>
+									}
+								/>
+								{value !== null && (
+									<Box sx={{ ml: 2 }}>
+										{labels[hover !== -1 ? hover : value]}
+									</Box>
+								)}
+							</Box>
+							<ButtonContainer>
+								<ButtonScore
+									onClick={() => {
+										handleScore(openPopup);
+									}}
+								>
+									Agregar y Volver
+								</ButtonScore>
+								<ButtonScore
+									onClick={() => {
+										handleScoreStay(openPopup);
+									}}
+								>
+									Agregar y buscar +
+								</ButtonScore>
+							</ButtonContainer>
 						</InputContainer>
 					</>
 				)}
@@ -152,6 +229,23 @@ const PopupContainer = styled.div`
 	align-items: center;
 	border-radius: 8px;
 	padding: 20px;
+
+	@media ${devices.tablet} {
+		left: calc(50% - 200px);
+		top: 300px;
+	}
+
+	@media (max-width: 550px) {
+		left: calc(50% - 170px);
+		top: 300px;
+		width: 320px;
+	}
+
+	@media ${devices.mobileL} {
+		width: 250px;
+		left: calc(50% - 140px);
+		top: 300px;
+	}
 `;
 
 const Close = styled.div`
@@ -177,9 +271,6 @@ const InputContainer = styled.div`
 	flex-direction: column;
 	gap: 15px;
 `;
-const Input = styled.select`
-	width: 100%;
-`;
 
 export const DialogShadow = styled.div`
 	width: 100vw;
@@ -189,4 +280,15 @@ export const DialogShadow = styled.div`
 	opacity: 0.7;
 	position: fixed;
 	z-index: 4;
+`;
+
+const ButtonScore = styled(Button)`
+	padding: 7px;
+`;
+
+const ButtonContainer = styled.div`
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	margin-top: 20px;
 `;
