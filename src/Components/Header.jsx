@@ -83,7 +83,7 @@ const Icon = styled.div`
 	align-items: center;
 `;
 
-const PlusIcon = styled.img`
+export const PlusIcon = styled.img`
 	cursor: pointer;
 	@media ${devices.tablet} {
 		display: none;

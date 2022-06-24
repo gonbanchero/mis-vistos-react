@@ -96,7 +96,6 @@ const Container = styled.section`
 `;
 
 const Izquierda = styled.div`
-	max-width: 40%;
 	padding: 20px;
 	display: flex;
 	justify-content: center;
@@ -117,11 +116,14 @@ const Img = styled.img`
 		width: 70%;
 		padding: 0;
 	}
+	@media ${devices.mobileL} {
+		max-width: 80%;
+	}
 `;
 
 const Derecha = styled.div`
 	box-sizing: border-box;
-	max-width: 60%;
+
 	padding: 80px;
 	display: flex;
 	flex-direction: column;
@@ -131,6 +133,10 @@ const Derecha = styled.div`
 	}
 	@media ${devices.laptopL} {
 		padding: 50px;
+	}
+	@media ${devices.mobileL} {
+		width: 100%;
+		padding: 50px 40px;
 	}
 `;
 

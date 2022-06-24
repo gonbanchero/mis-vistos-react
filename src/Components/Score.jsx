@@ -239,9 +239,9 @@ const PopupContainer = styled.div`
 	}
 
 	@media ${devices.mobileL} {
-		width: 250px;
-		left: calc(50% - 140px);
-		top: 300px;
+		left: 5%;
+		width: 80%;
+		top: 150px;
 	}
 `;
 

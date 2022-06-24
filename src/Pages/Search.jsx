@@ -9,6 +9,8 @@ import { ResultsCards } from '../Components/ResultsCards';
 import { Score } from '../Components/Score';
 import { useOpenPopup } from '../Hooks/useOpenPopup';
 import { devices } from '../Styles/breakpoints/responsive';
+import HomeIconImg from '../img/home.svg';
+import { useNavigate } from 'react-router-dom';
 
 export const Search = () => {
 	const openedPopup = useOpenPopup();
@@ -27,8 +29,17 @@ export const Search = () => {
 
 	const { search } = useSelector((state) => state.search.search);
 
+	const navigate = useNavigate();
 	return (
 		<>
+			<Icon>
+				<HomeIcon
+					src={HomeIconImg}
+					onClick={() => {
+						navigate('/');
+					}}
+				></HomeIcon>
+			</Icon>
 			<MainContainer>
 				<Score {...openedPopup}></Score>
 				<Container>
@@ -36,7 +47,6 @@ export const Search = () => {
 						type="text"
 						ref={busqueda}
 						onKeyUp={enterHandler}
-						autoFocus
 					></Input>
 					<Button onClick={handleSubmit}>Buscar</Button>
 				</Container>
@@ -58,7 +68,7 @@ const MainContainer = styled.div`
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: start;
 	align-items: center;
 	padding: 30px 0px;
 `;
@@ -103,5 +113,20 @@ export const Button = styled.button`
 	cursor: pointer;
 	&:hover  {
 		background-color: ${primary};
+	}
+`;
+
+const HomeIcon = styled.img`
+	cursor: pointer;
+`;
+
+const Icon = styled.div`
+	position: fixed;
+	right: 1rem;
+	bottom: 4rem;
+	display: none;
+	z-index: 20;
+	@media ${devices.tablet} {
+		display: block;
 	}
 `;

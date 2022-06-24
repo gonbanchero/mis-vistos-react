@@ -2,15 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { ViewedCards } from '../Components/ViewedCards';
-import { Link } from 'react-router-dom';
 import { devices } from '../Styles/breakpoints/responsive';
 
+import PlusIconImg from '../img/add_icon.svg';
+import { useNavigate } from 'react-router-dom';
+
 export const Home = () => {
+	const navigate = useNavigate();
 	const viewedMovies = useSelector((state) => state.views.views);
 	// console.log(viewedMovies);
 
 	return (
 		<>
+			<Icon>
+				<PlusIcon
+					src={PlusIconImg}
+					onClick={() => {
+						navigate('/search');
+					}}
+				></PlusIcon>
+			</Icon>
 			{viewedMovies.length === 0 ? (
 				<WelcomeContainer>
 					<WelcomeTitle>
@@ -83,6 +94,7 @@ const WelcomeContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 	max-width: 800px;
+
 	@media ${devices.tablet} {
 		width: auto;
 		padding: 50px 30px;
@@ -121,4 +133,19 @@ const TypeTitle = styled.h2`
 const Divider = styled.div`
 	height: 1px;
 	background-color: #aaaaaa;
+`;
+
+const Icon = styled.div`
+	position: fixed;
+	right: 1rem;
+	bottom: 4rem;
+	display: none;
+	z-index: 20;
+	@media ${devices.tablet} {
+		display: block;
+	}
+`;
+
+const PlusIcon = styled.img`
+	cursor: pointer;
 `;
