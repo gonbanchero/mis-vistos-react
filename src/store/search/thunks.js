@@ -1,22 +1,5 @@
 import axios from 'axios';
-
-const INITIAL_STATE = {
-	search: [],
-};
-
-const SEARCH_MOVIE = 'SEARCH_MOVIE';
-
-export const searchReducer = (state = INITIAL_STATE, { type, payload }) => {
-	switch (type) {
-		case SEARCH_MOVIE:
-			return {
-				...state,
-				search: payload,
-			};
-		default:
-			return state;
-	}
-};
+import { searchMovie } from './searchSlice';
 
 export const searchForMovie = (movie) => async (dispatch) => {
 	try {
@@ -26,7 +9,8 @@ export const searchForMovie = (movie) => async (dispatch) => {
 		const data = res.data.results;
 		// console.log(data);
 		const withImages = data.filter((movie) => movie.backdrop_path !== null);
-		dispatch({ type: SEARCH_MOVIE, payload: { search: withImages } });
+		console.log(withImages);
+		dispatch(searchMovie(withImages));
 	} catch (error) {
 		alert(error);
 	}

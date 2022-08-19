@@ -7,10 +7,22 @@ import PlusIconImg from '../img/add_icon.svg';
 import HomeIconImg from '../img/home.svg';
 import LogoImg from '../img/LogoMV.png';
 import { devices } from '../Styles/breakpoints/responsive';
+import { useCheckAuth } from '../Hooks/useCheckAuth';
+import { AppBar, IconButton, Toolbar } from '@mui/material';
+import { LogoutOutlined, AddCircle, Home } from '@mui/icons-material';
+import { useDispatch } from 'react-redux';
+import { startLogout } from '../store/auth';
 
 export const Header = () => {
 	const navigate = useNavigate();
 	const thisLocation = useLocation();
+	const dispatch = useDispatch();
+
+	const { status } = useCheckAuth();
+
+	const onLogout = () => {
+		dispatch(startLogout());
+	};
 
 	return (
 		<MainContainer>
@@ -18,23 +30,36 @@ export const Header = () => {
 				<Link to="/">
 					<Logo src={LogoImg} />
 				</Link>
-				<Icon>
-					{thisLocation.pathname === '/' ? (
-						<PlusIcon
-							src={PlusIconImg}
-							onClick={() => {
-								navigate('/search');
-							}}
-						></PlusIcon>
-					) : (
-						<HomeIcon
-							src={HomeIconImg}
-							onClick={() => {
-								navigate('/');
-							}}
-						></HomeIcon>
-					)}
-				</Icon>
+				{status === 'authenticated' ? (
+					<Buttons>
+						<Icon>
+							{thisLocation.pathname === '/' ? (
+								<IconButton
+									color="success"
+									onClick={() => {
+										navigate('/search');
+									}}
+								>
+									<AddCircle fontSize="large" />
+								</IconButton>
+							) : (
+								<IconButton
+									color="success"
+									onClick={() => {
+										navigate('/');
+									}}
+								>
+									<Home fontSize="large" />
+								</IconButton>
+							)}
+						</Icon>
+						<IconButton color="error" onClick={onLogout}>
+							<LogoutOutlined fontSize="large" />
+						</IconButton>
+					</Buttons>
+				) : (
+					''
+				)}
 			</MainHeader>
 		</MainContainer>
 	);
@@ -71,6 +96,10 @@ const MainHeader = styled.div`
 	}
 `;
 
+const Buttons = styled.div`
+	display: flex;
+	gap: 10px;
+`;
 const Logo = styled.img`
 	width: 150px;
 	@media ${devices.tablet} {
@@ -83,16 +112,16 @@ const Icon = styled.div`
 	align-items: center;
 `;
 
-export const PlusIcon = styled.img`
-	cursor: pointer;
-	@media ${devices.tablet} {
-		display: none;
-	}
-`;
+// export const PlusIcon = styled.img`
+// 	cursor: pointer;
+// 	@media ${devices.tablet} {
+// 		display: none;
+// 	}
+// `;
 
-const HomeIcon = styled.img`
-	cursor: pointer;
-	@media ${devices.tablet} {
-		display: none;
-	}
-`;
+// const HomeIcon = styled.img`
+// 	cursor: pointer;
+// 	@media ${devices.tablet} {
+// 		display: none;
+// 	}
+// `;

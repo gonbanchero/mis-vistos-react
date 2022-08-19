@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { primary, secondary } from '../Styles/Colors';
 import { useRef } from 'react';
-import { searchForMovie } from '../Redux/Search/search-reducer';
+// import { searchForMovie } from '../Redux/Search/search-reducer';
+import { searchForMovie } from '../store/search/thunks';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { ResultsCards } from '../Components/ResultsCards';
@@ -11,6 +12,9 @@ import { useOpenPopup } from '../Hooks/useOpenPopup';
 import { devices } from '../Styles/breakpoints/responsive';
 import HomeIconImg from '../img/home.svg';
 import { useNavigate } from 'react-router-dom';
+
+import Fab from '@mui/material/Fab';
+import { House } from '@mui/icons-material';
 
 export const Search = () => {
 	const openedPopup = useOpenPopup();
@@ -27,20 +31,23 @@ export const Search = () => {
 		dispatch(searchForMovie(busqueda.current.value));
 	};
 
-	const { search } = useSelector((state) => state.search.search);
+	const { search } = useSelector((state) => state.search);
 
 	const navigate = useNavigate();
 	return (
 		<>
 			<Icon>
-				<HomeIcon
-					src={HomeIconImg}
+				<Fab
+					color="primary"
+					aria-label="add"
 					onClick={() => {
 						navigate('/');
 					}}
-				></HomeIcon>
+				>
+					<House />
+				</Fab>
 			</Icon>
-			<MainContainer>
+			<MainContainer className="animate__animated animate__fadeIn animate__faster">
 				<Score {...openedPopup}></Score>
 				<Container>
 					<Input
@@ -50,7 +57,7 @@ export const Search = () => {
 					></Input>
 					<Button onClick={handleSubmit}>Buscar</Button>
 				</Container>
-				<ListadoCards>
+				<ListadoCards className="animate__animated animate__fadeIn animate__faster">
 					{search?.map((item) => (
 						<ResultsCards
 							item={item}
@@ -71,6 +78,7 @@ const MainContainer = styled.div`
 	justify-content: start;
 	align-items: center;
 	padding: 30px 0px;
+	min-height: calc(100vh - 250px);
 `;
 
 const Container = styled.div`
@@ -122,8 +130,8 @@ const HomeIcon = styled.img`
 
 const Icon = styled.div`
 	position: fixed;
-	right: 1rem;
-	bottom: 4rem;
+	right: 30px;
+	bottom: 80px;
 	display: none;
 	z-index: 20;
 	@media ${devices.tablet} {

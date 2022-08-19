@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { viewedMovie } from '../store/views/';
 import { useDispatch } from 'react-redux';
-import { viewedMovie } from '../Redux/Views/views-reducer';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as CloseIcon } from '../img/close.svg';
 import { useSelector } from 'react-redux';
@@ -12,16 +12,17 @@ import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
 import { primary } from '../Styles/Colors';
+import { startAddingMovie } from '../store/views/thunks';
 
 export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const viewedMovies = useSelector((state) => state.views.views);
-	// console.log(viewedMovies);
 
 	const handleScore = (openPopup) => {
 		dispatch(viewedMovie(openPopup, value));
+		dispatch(startAddingMovie(openPopup, value));
 		setOpenPopup();
 		navigate('/');
 	};

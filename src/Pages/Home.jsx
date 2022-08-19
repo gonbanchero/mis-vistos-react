@@ -4,28 +4,34 @@ import { useSelector } from 'react-redux';
 import { ViewedCards } from '../Components/ViewedCards';
 import { devices } from '../Styles/breakpoints/responsive';
 
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 import PlusIconImg from '../img/add_icon.svg';
 import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
 	const navigate = useNavigate();
 	const viewedMovies = useSelector((state) => state.views.views);
-	// console.log(viewedMovies);
+	const { displayName } = useSelector((state) => state.auth);
 
 	return (
 		<>
 			<Icon>
-				<PlusIcon
-					src={PlusIconImg}
+				<Fab
+					color="primary"
+					aria-label="add"
 					onClick={() => {
 						navigate('/search');
 					}}
-				></PlusIcon>
+				>
+					<AddIcon />
+				</Fab>
 			</Icon>
 			{viewedMovies.length === 0 ? (
-				<WelcomeContainer>
+				<WelcomeContainer className="animate__animated animate__fadeIn animate__faster">
 					<WelcomeTitle>
-						Hola! Te damos la bienvenida a "Mis Vistos"
+						Hola {displayName}! Te damos la bienvenida a "Mis
+						Vistos"
 					</WelcomeTitle>
 					<WelcomeText>
 						En esta App podrás agregar tus peliculas o series vistas
@@ -39,7 +45,7 @@ export const Home = () => {
 				</WelcomeContainer>
 			) : (
 				<>
-					<Container>
+					<Container className="animate__animated animate__fadeIn animate__faster">
 						<TypeTitle>Series</TypeTitle>
 						<Divider />
 						<ListadoCards>
@@ -91,9 +97,10 @@ const WelcomeContainer = styled.div`
 	padding: 50px 100px;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: top;
 	align-items: center;
 	max-width: 800px;
+	min-height: calc(100vh - 290px);
 
 	@media ${devices.tablet} {
 		width: auto;
@@ -137,8 +144,8 @@ const Divider = styled.div`
 
 const Icon = styled.div`
 	position: fixed;
-	right: 1rem;
-	bottom: 4rem;
+	right: 30px;
+	bottom: 80px;
 	display: none;
 	z-index: 20;
 	@media ${devices.tablet} {

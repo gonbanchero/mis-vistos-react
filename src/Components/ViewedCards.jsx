@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Imagen from '../img/contemplative-reptile.jpg';
 import { Link } from 'react-router-dom';
-import { ReactComponent as StarIcon } from '../img/star.svg';
+
 import { Rating } from '@mui/material';
+import { devices } from '../Styles/breakpoints/responsive';
 
 export const ViewedCards = (item) => {
 	const handleWsp = () => {
@@ -14,7 +15,6 @@ export const ViewedCards = (item) => {
 			'_self'
 		);
 	};
-	// console.log(item);
 
 	return (
 		<Card>
@@ -55,13 +55,16 @@ export const ViewedCards = (item) => {
 
 const Card = styled.div`
 	counter-increment: grid-item;
-	width: 100%;
+	max-width: 400px;
 	height: auto;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
+	@media ${devices.tablet} {
+		max-width: 100%;
+	}
 `;
 
 const Img = styled.img`
