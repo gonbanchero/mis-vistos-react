@@ -23,7 +23,7 @@ export const handleViewedMovie = (state, payload) => {
 };
 
 export const startAddingMovie = (movieAdded, score) => {
-	console.log(movieAdded, value);
+	console.log(movieAdded, score);
 	return async (dispatch, getState) => {
 		console.log('agregamos la movie ameo', getState());
 
