@@ -21,25 +21,25 @@ export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 	const viewedMovies = useSelector((state) => state.views.views);
 
 	const handleScore = (openPopup) => {
-		dispatch(viewedMovie(openPopup, value));
+		// dispatch(viewedMovie(openPopup, value));
 		dispatch(startAddingMovie(openPopup, value));
 		setOpenPopup();
 		navigate('/');
 	};
 
 	const handleScoreStay = (openPopup) => {
-		dispatch(viewedMovie(openPopup, value));
+		dispatch(startAddingMovie(openPopup, value));
 		setOpenPopup();
 	};
 
 	const handleUpdateScore = (openPopup) => {
-		dispatch(viewedMovie(openPopup, value));
+		dispatch(startAddingMovie(openPopup, value));
 		setOpenPopup();
 		navigate('/');
 	};
 
 	const handleUpdateScoreStay = (openPopup) => {
-		dispatch(viewedMovie(openPopup, value));
+		dispatch(startAddingMovie(openPopup, value));
 		setOpenPopup();
 	};
 
