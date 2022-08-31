@@ -1,18 +1,26 @@
-import React from 'react';
+import { React, useEffect } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { ViewedCards } from '../Components/ViewedCards';
 import { devices } from '../Styles/breakpoints/responsive';
 
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import PlusIconImg from '../img/add_icon.svg';
+
 import { useNavigate } from 'react-router-dom';
+import { startLoadingViewed } from '../store/views';
 
 export const Home = () => {
 	const navigate = useNavigate();
 	const viewedMovies = useSelector((state) => state.views.views);
 	const { displayName } = useSelector((state) => state.auth);
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(startLoadingViewed());
+	}, []);
 
 	return (
 		<>

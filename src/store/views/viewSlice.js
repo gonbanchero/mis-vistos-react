@@ -9,13 +9,15 @@ export const viewSlice = createSlice({
 	reducers: {
 		ViewedMovie: (state, action) => {
 			state.views.push(action.payload);
-			// state.views = handleViewedMovie(state.views, action.payload);
 		},
 		SetViewed: (state, action) => {
 			state.views = action.payload;
+		},
+		ClearViewsLogout: (state) => {
+			state.views = [];
 		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { ViewedMovie, SetViewed } = viewSlice.actions;
+export const { ClearViewsLogout, ViewedMovie, SetViewed } = viewSlice.actions;

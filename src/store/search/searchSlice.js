@@ -9,8 +9,11 @@ export const searchSlice = createSlice({
 		searchMovie: (state, { payload }) => {
 			state.search = payload;
 		},
+		ClearSearchLogout: (state) => {
+			state.search = [];
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { searchMovie } = searchSlice.actions;
+export const { ClearSearchLogout, searchMovie } = searchSlice.actions;

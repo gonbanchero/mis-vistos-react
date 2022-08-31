@@ -1,4 +1,5 @@
 import { checkingCredentials, logout, login } from './';
+import { ClearViewsLogout } from '../views';
 
 import {
 	logoutFirebase,
@@ -7,6 +8,7 @@ import {
 	loginWithEmailPassword,
 } from '../../firebase/providers';
 import { Navigate } from 'react-router-dom';
+import { ClearSearchLogout } from '../search/searchSlice';
 
 export const checkingAuthentication = (email, password) => {
 	return async ({ dispatch }) => {
@@ -58,7 +60,8 @@ export const startLoginWithEmailPassword = ({ email, password }) => {
 export const startLogout = () => {
 	return async (dispatch) => {
 		await logoutFirebase();
-
+		dispatch(ClearViewsLogout());
+		dispatch(ClearSearchLogout());
 		dispatch(logout());
 	};
 };

@@ -21,7 +21,6 @@ export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 	const viewedMovies = useSelector((state) => state.views.views);
 
 	const handleScore = (openPopup) => {
-		// dispatch(viewedMovie(openPopup, value));
 		dispatch(startAddingMovie(openPopup, value));
 		setOpenPopup();
 		navigate('/');

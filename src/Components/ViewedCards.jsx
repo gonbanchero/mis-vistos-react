@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 import { Rating } from '@mui/material';
 import { devices } from '../Styles/breakpoints/responsive';
+import { startDeletingMovie } from '../store/views';
+import { useDispatch } from 'react-redux';
 
 export const ViewedCards = (item) => {
 	const handleWsp = () => {
@@ -14,6 +16,12 @@ export const ViewedCards = (item) => {
 			}".%0AYo le puse ${item.item.puntaje} puntos.`,
 			'_self'
 		);
+	};
+
+	const dispatch = useDispatch();
+
+	const handleBorrar = (id) => {
+		dispatch(startDeletingMovie(id));
 	};
 
 	return (
@@ -48,6 +56,14 @@ export const ViewedCards = (item) => {
 						<Link to={`/tv/${item.item.id}`}>Ver Más</Link>
 					</Button>
 				)}
+				<Button
+					key={item.item.id}
+					onClick={() => {
+						handleBorrar(item.item.firebase_id);
+					}}
+				>
+					Borrar
+				</Button>
 			</Footer>
 		</Card>
 	);
