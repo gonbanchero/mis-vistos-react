@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Home } from '../Pages/Home';
-import { Search } from '../Pages/Search';
+import { Search } from '../Components/Search';
 import { Movie } from '../Pages/Movie';
 import { Tv } from '../Pages/Tv';
 

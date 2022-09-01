@@ -1,20 +1,16 @@
 import { React, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-
-import { ViewedCards } from '../Components/ViewedCards';
 import { devices } from '../Styles/breakpoints/responsive';
 
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
-
-import { useNavigate } from 'react-router-dom';
 import { startLoadingViewed } from '../store/views';
+import { HomeMovie, HomeSeries } from '../Components/';
+import { Search } from '../Components/Search';
 
 export const Home = () => {
-	const navigate = useNavigate();
 	const viewedMovies = useSelector((state) => state.views.views);
 	const { displayName } = useSelector((state) => state.auth);
+	const activeMenu = useSelector((state) => state.menu.activeMenu);
 
 	const dispatch = useDispatch();
 
@@ -24,17 +20,6 @@ export const Home = () => {
 
 	return (
 		<>
-			<Icon>
-				<Fab
-					color="primary"
-					aria-label="add"
-					onClick={() => {
-						navigate('/search');
-					}}
-				>
-					<AddIcon />
-				</Fab>
-			</Icon>
 			{viewedMovies.length === 0 ? (
 				<WelcomeContainer className="animate__animated animate__fadeIn animate__faster">
 					<WelcomeTitle>
@@ -53,52 +38,14 @@ export const Home = () => {
 				</WelcomeContainer>
 			) : (
 				<>
-					<Container className="animate__animated animate__fadeIn animate__faster">
-						<TypeTitle>Series</TypeTitle>
-						<Divider />
-						<ListadoCards>
-							{viewedMovies
-								?.filter((item) => item.media_type === 'tv')
-								.map((item) => (
-									<ViewedCards
-										item={item}
-										key={item.id}
-									></ViewedCards>
-								))}
-						</ListadoCards>
-					</Container>
-					<Container>
-						<TypeTitle>Películas</TypeTitle>
-						<Divider />
-						<ListadoCards>
-							{viewedMovies
-								?.filter((item) => item.media_type === 'movie')
-								.map((item) => (
-									<ViewedCards
-										item={item}
-										key={item.id}
-									></ViewedCards>
-								))}
-						</ListadoCards>
-					</Container>
+					{activeMenu === 'movies' ? <HomeMovie /> : null}
+					{activeMenu === 'series' ? <HomeSeries /> : null}
+					{activeMenu === 'addnew' ? <Search /> : null}
 				</>
 			)}
 		</>
 	);
 };
-
-const ListadoCards = styled.div`
-	display: grid;
-	counter-reset: grid-items;
-	position: relative;
-	grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-	margin: 50px 0px;
-	gap: 3%;
-	max-width: 1900px;
-	width: 100%;
-	box-sizing: border-box;
-	width: auto;
-`;
 
 const WelcomeContainer = styled.div`
 	margin: 0 auto;
@@ -126,41 +73,4 @@ const WelcomeText = styled.p`
 	color: #fff;
 	text-align: center;
 	line-height: 2rem;
-`;
-
-const Container = styled.div`
-	margin: 0 auto;
-	padding: 2% 10%;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	box-sizing: border-box;
-	@media ${devices.tablet} {
-		padding: 5% 10% 30% 10%;
-	}
-`;
-
-const TypeTitle = styled.h2`
-	color: #fff;
-	margin-bottom: 5px;
-`;
-
-const Divider = styled.div`
-	height: 1px;
-	background-color: #aaaaaa;
-`;
-
-const Icon = styled.div`
-	position: fixed;
-	right: 30px;
-	bottom: 80px;
-	display: none;
-	z-index: 20;
-	@media ${devices.tablet} {
-		display: block;
-	}
-`;
-
-const PlusIcon = styled.img`
-	cursor: pointer;
 `;

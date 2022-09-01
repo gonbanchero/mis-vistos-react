@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 
 import { Header } from './Components/Header';
+import { MenuBar } from './Components';
 import { Footer } from './Components/Footer';
 
 import { LoginRoutes } from './Routes/LoginRoutes';
@@ -32,7 +33,8 @@ function App() {
 				)}
 				<Route path="/*" element={<Navigate to="/auth/login" />} />
 			</Routes>
-			<Footer />
+
+			{status === 'authenticated' ? <MenuBar /> : null}
 		</Router>
 	);
 }

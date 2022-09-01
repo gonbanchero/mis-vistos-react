@@ -9,6 +9,7 @@ import {
 } from '../../firebase/providers';
 import { Navigate } from 'react-router-dom';
 import { ClearSearchLogout } from '../search/searchSlice';
+import { ActiveMenu } from '../menubar/menuSlice';
 
 export const checkingAuthentication = (email, password) => {
 	return async ({ dispatch }) => {
@@ -63,5 +64,6 @@ export const startLogout = () => {
 		dispatch(ClearViewsLogout());
 		dispatch(ClearSearchLogout());
 		dispatch(logout());
+		dispatch(ActiveMenu('movies'));
 	};
 };

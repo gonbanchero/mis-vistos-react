@@ -1,9 +1,8 @@
-import { ViewedMovie, SetViewed } from '../../store/views';
+import { SetViewed } from '../../store/views';
 import { collection, deleteDoc, doc, setDoc } from 'firebase/firestore/lite';
 import { FirebaseDB } from '../../firebase/config';
 
 import { loadViewed } from '../../helpers/';
-import { async } from '@firebase/util';
 
 export const startAddingMovie = (movieAdded, score) => {
 	return async (dispatch, getState) => {
@@ -78,60 +77,3 @@ export const startDeletingMovie = (id) => {
 		dispatch(startLoadingViewed());
 	};
 };
-// export const viewedMovie = (movieToAdd, scoreToAdd) => (dispatch) => {
-// 	dispatch(viewsReducer({ ...movieToAdd, puntaje: scoreToAdd }));
-// };
-
-// export const handleViewedMovie = (state, payload) => {
-//
-
-// 	if (existingViewedMovie) {
-// 		return state.map((movie) => {
-// 			return movie.id === payload.id
-// 				? { ...movie, puntaje: payload.puntaje }
-// 				: movie;
-// 		});
-// 	}
-
-// 	return [...state, { ...payload, puntaje: payload.puntaje }];
-// };
-
-// Ver duplicados
-
-// const moviesInState = useSelector((state) => state.views.views);
-// console.log(moviesInState);
-
-// const existingViewedMovie = moviesInState.find(
-// 	(viewed) => viewed.id === moviesInState.id
-// );
-
-// console.log(existingViewedMovie);
-
-// if (existingViewedMovie) {
-// 	return moviesInState.map((movie) => {
-// 		return movie.id === movieAdded.id
-// 			? { ...movie, puntaje: movieAdded.puntaje }
-// 			: movie;
-// 	});
-// }
-
-// console.log(existingViewedMovie);
-
-// if (existingViewedMovie) {
-// 	return previousAddedMovies.map((movie) => {
-// 		return movie.id === movieAdded.id
-// 			? { ...movie, puntaje: score }
-// 			: movie;
-// 	});
-// }
-
-//LOGICA PARA DETECTAR LOS DUPLICADOS
-// const previousAddedMovies = getState().views.views;
-
-// const existingViewedMovie = previousAddedMovies.find(
-// 	(viewed) => viewed.id === movieAdded.id
-// );
-
-// const moviesIds = previousAddedMovies.map((movie) => movie.id);
-// const findDuplicated = moviesIds.indexOf(moviesIds.id) === -1;
-// console.log(findDuplicated);

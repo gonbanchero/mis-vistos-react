@@ -2,19 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { primary, secondary } from '../Styles/Colors';
 import { useRef } from 'react';
-// import { searchForMovie } from '../Redux/Search/search-reducer';
 import { searchForMovie } from '../store/search/thunks';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { ResultsCards } from '../Components/ResultsCards';
-import { Score } from '../Components/Score';
+import { ResultsCards } from './ResultsCards';
+import { Score } from './Score';
 import { useOpenPopup } from '../Hooks/useOpenPopup';
 import { devices } from '../Styles/breakpoints/responsive';
-import HomeIconImg from '../img/home.svg';
-import { useNavigate } from 'react-router-dom';
-
-import Fab from '@mui/material/Fab';
-import { House } from '@mui/icons-material';
 
 export const Search = () => {
 	const openedPopup = useOpenPopup();
@@ -33,20 +27,8 @@ export const Search = () => {
 
 	const { search } = useSelector((state) => state.search);
 
-	const navigate = useNavigate();
 	return (
 		<>
-			<Icon>
-				<Fab
-					color="primary"
-					aria-label="add"
-					onClick={() => {
-						navigate('/');
-					}}
-				>
-					<House />
-				</Fab>
-			</Icon>
 			<MainContainer className="animate__animated animate__fadeIn animate__faster">
 				<Score {...openedPopup}></Score>
 				<Container>

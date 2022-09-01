@@ -13,17 +13,20 @@ import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
 import { primary } from '../Styles/Colors';
 import { startAddingMovie } from '../store/views/thunks';
+import { ActiveMenu } from '../store/menubar/menuSlice';
 
 export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	const viewedMovies = useSelector((state) => state.views.views);
 
 	const handleScore = (openPopup) => {
 		dispatch(startAddingMovie(openPopup, value));
 		setOpenPopup();
-		navigate('/');
+
+		openPopup.media_type === 'movie'
+			? dispatch(ActiveMenu('movies'))
+			: dispatch(ActiveMenu('series'));
 	};
 
 	const handleScoreStay = (openPopup) => {
@@ -34,7 +37,9 @@ export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 	const handleUpdateScore = (openPopup) => {
 		dispatch(startAddingMovie(openPopup, value));
 		setOpenPopup();
-		navigate('/');
+		openPopup.media_type === 'movie'
+			? dispatch(ActiveMenu('movies'))
+			: dispatch(ActiveMenu('series'));
 	};
 
 	const handleUpdateScoreStay = (openPopup) => {
@@ -62,8 +67,6 @@ export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 
 	const [value, setValue] = React.useState(2);
 	const [hover, setHover] = React.useState(-1);
-
-	// console.log(value);
 
 	// EVALUA SI ITEM ELEGIDO ESTÁ YA CARGADO EN LOS VISTOS CON EL RETURN SE HACE LA CONDICIÓN EN EL COMPONENTE Y MUESTRA 2 INFOS DIFERENTES EN EL POPUP
 	const printConditionViewed = (viewedMovies) => {
