@@ -5,16 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ViewedCards } from '../Components/ViewedCards';
 import { devices } from '../Styles/breakpoints/responsive';
 
-import { startLoadingViewed } from '../store/views';
-
 export const HomeSeries = () => {
 	const viewedMovies = useSelector((state) => state.views.views);
+	const { displayName } = useSelector((state) => state.auth);
 
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(startLoadingViewed());
-	}, []);
+	const firstName = displayName.split(/\b(\s)/);
 
 	return (
 		<>
@@ -22,14 +17,21 @@ export const HomeSeries = () => {
 				<TypeTitle>Series</TypeTitle>
 				<Divider />
 				<ListadoCards>
-					{viewedMovies
-						?.filter((item) => item.media_type === 'tv')
-						.map((item) => (
-							<ViewedCards
-								item={item}
-								key={item.id}
-							></ViewedCards>
-						))}
+					{viewedMovies.length === 0 ? (
+						<NothingAdded>
+							{firstName[0]}, Todavía no agregaste nada.. empezá
+							haciendo click en el botón +
+						</NothingAdded>
+					) : (
+						viewedMovies
+							?.filter((item) => item.media_type === 'tv')
+							.map((item) => (
+								<ViewedCards
+									item={item}
+									key={item.id}
+								></ViewedCards>
+							))
+					)}
 				</ListadoCards>
 			</Container>
 		</>
@@ -69,4 +71,8 @@ const TypeTitle = styled.h2`
 const Divider = styled.div`
 	height: 1px;
 	background-color: #aaaaaa;
+`;
+
+const NothingAdded = styled.div`
+	color: #ffffff;
 `;

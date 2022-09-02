@@ -8,13 +8,17 @@ import { devices } from '../Styles/breakpoints/responsive';
 import { startDeletingMovie } from '../store/views';
 import { useDispatch } from 'react-redux';
 
+import ShareIcon from '@mui/icons-material/Share';
+import InfoIcon from '@mui/icons-material/Info';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 export const ViewedCards = (item) => {
 	const handleWsp = () => {
 		window.open(
 			`https://api.whatsapp.com/send?text=Te recomiendo que mires "${
 				item.item.name || item.item.original_title
 			}".%0AYo le puse ${item.item.puntaje} puntos.`,
-			'_self'
+			'_blank'
 		);
 	};
 
@@ -44,26 +48,46 @@ export const ViewedCards = (item) => {
 			</Info>
 
 			<Footer>
-				<Button key={item.item.id} onClick={handleWsp}>
-					Compartir
-				</Button>
+				<ShareIcon
+					onClick={handleWsp}
+					sx={{
+						color: '#ffffff',
+						fontSize: '20px',
+						cursor: 'pointer',
+					}}
+				/>
+
 				{item.item.media_type === 'movie' ? (
-					<Button>
-						<Link to={`/movie/${item.item.id}`}>Ver Más</Link>
-					</Button>
+					<Link to={`/movie/${item.item.id}`}>
+						<InfoIcon
+							sx={{
+								color: '#ffffff',
+								fontSize: '20px',
+								cursor: 'pointer',
+							}}
+						/>
+					</Link>
 				) : (
-					<Button>
-						<Link to={`/tv/${item.item.id}`}>Ver Más</Link>
-					</Button>
+					<Link to={`/tv/${item.item.id}`}>
+						<InfoIcon
+							sx={{
+								color: '#ffffff',
+								fontSize: '20px',
+								cursor: 'pointer',
+							}}
+						/>
+					</Link>
 				)}
-				<Button
-					key={item.item.id}
+				<DeleteIcon
 					onClick={() => {
 						handleBorrar(item.item.firebase_id);
 					}}
-				>
-					Borrar
-				</Button>
+					sx={{
+						color: '#ffffff',
+						fontSize: '20px',
+						cursor: 'pointer',
+					}}
+				/>
 			</Footer>
 		</Card>
 	);

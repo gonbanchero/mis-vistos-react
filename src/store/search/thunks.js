@@ -8,7 +8,7 @@ export const searchForMovie = (movie) => async (dispatch) => {
 		);
 		const data = res.data.results;
 		// console.log(data);
-		const withImages = data.filter((movie) => movie.backdrop_path !== null);
+		const withImages = data.filter((movie) => movie.backdrop_path);
 		console.log(withImages);
 		dispatch(searchMovie(withImages));
 	} catch (error) {

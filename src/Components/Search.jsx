@@ -39,14 +39,20 @@ export const Search = () => {
 					></Input>
 					<Button onClick={handleSubmit}>Buscar</Button>
 				</Container>
+
 				<ListadoCards className="animate__animated animate__fadeIn animate__faster">
-					{search?.map((item) => (
-						<ResultsCards
-							item={item}
-							key={item.id}
-							{...openedPopup}
-						></ResultsCards>
-					))}
+					{search.length === 0
+						? null // <NoResults>
+						: // 	No se encontraron resultados con esa búsqueda...
+						  // 	probá de nuevo.
+						  // </NoResults>
+						  search?.map((item) => (
+								<ResultsCards
+									item={item}
+									key={item.id}
+									{...openedPopup}
+								></ResultsCards>
+						  ))}
 				</ListadoCards>
 			</MainContainer>
 		</>
@@ -106,17 +112,7 @@ export const Button = styled.button`
 	}
 `;
 
-const HomeIcon = styled.img`
-	cursor: pointer;
-`;
-
-const Icon = styled.div`
-	position: fixed;
-	right: 30px;
-	bottom: 80px;
-	display: none;
-	z-index: 20;
-	@media ${devices.tablet} {
-		display: block;
-	}
+const NoResults = styled.div`
+	color: #ffffff;
+	text-align: center;
 `;

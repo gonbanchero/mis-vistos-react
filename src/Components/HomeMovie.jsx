@@ -9,27 +9,31 @@ import { startLoadingViewed } from '../store/views';
 
 export const HomeMovie = () => {
 	const viewedMovies = useSelector((state) => state.views.views);
+	const { displayName } = useSelector((state) => state.auth);
 
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(startLoadingViewed());
-	}, []);
+	const firstName = displayName.split(/\b(\s)/);
 
 	return (
 		<>
-			<Container>
+			<Container className="animate__animated animate__fadeIn animate__faster">
 				<TypeTitle>Películas</TypeTitle>
 				<Divider />
 				<ListadoCards>
-					{viewedMovies
-						?.filter((item) => item.media_type === 'movie')
-						.map((item) => (
-							<ViewedCards
-								item={item}
-								key={item.id}
-							></ViewedCards>
-						))}
+					{viewedMovies.length === 0 ? (
+						<NothingAdded>
+							{firstName[0]}, Todavía no agregaste nada.. empezá
+							haciendo click en el botón +
+						</NothingAdded>
+					) : (
+						viewedMovies
+							?.filter((item) => item.media_type === 'movie')
+							.map((item) => (
+								<ViewedCards
+									item={item}
+									key={item.id}
+								></ViewedCards>
+							))
+					)}
 				</ListadoCards>
 			</Container>
 		</>
@@ -70,3 +74,54 @@ const Divider = styled.div`
 	height: 1px;
 	background-color: #aaaaaa;
 `;
+
+const NothingAdded = styled.div`
+	color: #ffffff;
+`;
+// const WelcomeContainer = styled.div`
+// 	margin: 0 auto;
+// 	padding: 50px 100px;
+// 	display: flex;
+// 	flex-direction: column;
+// 	justify-content: top;
+// 	align-items: center;
+// 	max-width: 800px;
+// 	min-height: calc(100vh - 290px);
+
+// 	@media ${devices.tablet} {
+// 		width: auto;
+// 		padding: 50px 30px;
+// 	}
+// `;
+
+// const WelcomeTitle = styled.h2`
+// 	text-align: center;
+// 	font-size: 1.7rem;
+// 	color: #fff;
+// `;
+
+// const WelcomeText = styled.p`
+// 	color: #fff;
+// 	text-align: center;
+// 	line-height: 2rem;
+// `;
+
+// <>
+// 	{viewedMovies.length === 0 ? (
+// 		<WelcomeContainer className="animate__animated animate__fadeIn animate__faster">
+// 			<WelcomeTitle>
+// 				Hola {displayName}! Te damos la bienvenida a "Mis
+// 				Vistos"
+// 			</WelcomeTitle>
+// 			<WelcomeText>
+// 				En esta App podrás agregar tus peliculas o series vistas
+// 				para que cuando te pregunten "¿Qué me recomendás para
+// 				mirar?" tengas tus favoritos siempre a mano.
+// 			</WelcomeText>
+// 			<WelcomeText>
+// 				👉 Empezá agregando tu primer "visto" haciendo click en
+// 				el ícono +
+// 			</WelcomeText>
+// 		</WelcomeContainer>
+// 	) : null}
+// </>

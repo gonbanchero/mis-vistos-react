@@ -47,6 +47,7 @@ export const MenuBar = () => {
 				label="Series"
 				value="series"
 				icon={<LiveTvIcon />}
+				sx={{}}
 			/>
 			<BottomNavigationAction
 				label="Add New"

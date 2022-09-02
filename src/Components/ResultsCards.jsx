@@ -5,6 +5,9 @@ import { useDispatch } from 'react-redux';
 import { devices } from '../Styles/breakpoints/responsive';
 import { Link } from 'react-router-dom';
 
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import InfoIcon from '@mui/icons-material/Info';
+
 export const ResultsCards = (props) => {
 	const dispatch = useDispatch();
 
@@ -27,23 +30,37 @@ export const ResultsCards = (props) => {
 
 			<Title>{props.item.name || props.item.original_title}</Title>
 			<Footer>
-				<Button
-					key={props.item.id}
+				<AddCircleIcon
 					onClick={() => {
 						handleAdd(props.item);
 					}}
-				>
-					Agregar
-				</Button>
+					sx={{
+						color: '#ffffff',
+						fontSize: '20px',
+						cursor: 'pointer',
+					}}
+				/>
 				<Button>
 					{props.item.media_type === 'movie' ? (
-						<Button>
-							<Link to={`/movie/${props.item.id}`}>Ver Más</Link>
-						</Button>
+						<Link to={`/movie/${props.item.id}`}>
+							<InfoIcon
+								sx={{
+									color: '#ffffff',
+									fontSize: '20px',
+									cursor: 'pointer',
+								}}
+							/>
+						</Link>
 					) : (
-						<Button>
-							<Link to={`/tv/${props.item.id}`}>Ver Más</Link>
-						</Button>
+						<Link to={`/tv/${props.item.id}`}>
+							<InfoIcon
+								sx={{
+									color: '#ffffff',
+									fontSize: '20px',
+									cursor: 'pointer',
+								}}
+							/>
+						</Link>
 					)}
 				</Button>
 			</Footer>

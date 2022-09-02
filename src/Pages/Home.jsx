@@ -8,8 +8,6 @@ import { HomeMovie, HomeSeries } from '../Components/';
 import { Search } from '../Components/Search';
 
 export const Home = () => {
-	const viewedMovies = useSelector((state) => state.views.views);
-	const { displayName } = useSelector((state) => state.auth);
 	const activeMenu = useSelector((state) => state.menu.activeMenu);
 
 	const dispatch = useDispatch();
@@ -20,29 +18,9 @@ export const Home = () => {
 
 	return (
 		<>
-			{viewedMovies.length === 0 ? (
-				<WelcomeContainer className="animate__animated animate__fadeIn animate__faster">
-					<WelcomeTitle>
-						Hola {displayName}! Te damos la bienvenida a "Mis
-						Vistos"
-					</WelcomeTitle>
-					<WelcomeText>
-						En esta App podrás agregar tus peliculas o series vistas
-						para que cuando te pregunten "¿Qué me recomendás para
-						mirar?" tengas tus favoritos siempre a mano.
-					</WelcomeText>
-					<WelcomeText>
-						👉 Empezá agregando tu primer "visto" haciendo click en
-						el ícono +
-					</WelcomeText>
-				</WelcomeContainer>
-			) : (
-				<>
-					{activeMenu === 'movies' ? <HomeMovie /> : null}
-					{activeMenu === 'series' ? <HomeSeries /> : null}
-					{activeMenu === 'addnew' ? <Search /> : null}
-				</>
-			)}
+			{activeMenu === 'movies' ? <HomeMovie /> : null}
+			{activeMenu === 'series' ? <HomeSeries /> : null}
+			{activeMenu === 'addnew' ? <Search /> : null}
 		</>
 	);
 };

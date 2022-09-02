@@ -20,7 +20,6 @@ export const Tv = () => {
 		fetch();
 	}, []);
 
-	console.log(tv);
 	const navigate = useNavigate();
 
 	return (

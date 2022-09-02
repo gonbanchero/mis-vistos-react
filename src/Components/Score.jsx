@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { viewedMovie } from '../store/views/';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { ReactComponent as CloseIcon } from '../img/close.svg';
 import { useSelector } from 'react-redux';
 import { devices } from '../Styles/breakpoints/responsive';
+import { startLoadingViewed } from '../store/views/thunks';
 
 // MUI
 import Rating from '@mui/material/Rating';
@@ -27,11 +26,13 @@ export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 		openPopup.media_type === 'movie'
 			? dispatch(ActiveMenu('movies'))
 			: dispatch(ActiveMenu('series'));
+		dispatch(startLoadingViewed());
 	};
 
 	const handleScoreStay = (openPopup) => {
 		dispatch(startAddingMovie(openPopup, value));
 		setOpenPopup();
+		dispatch(startLoadingViewed());
 	};
 
 	const handleUpdateScore = (openPopup) => {
@@ -40,11 +41,13 @@ export const ScorePopup = ({ openPopup, setOpenPopup }) => {
 		openPopup.media_type === 'movie'
 			? dispatch(ActiveMenu('movies'))
 			: dispatch(ActiveMenu('series'));
+		dispatch(startLoadingViewed());
 	};
 
 	const handleUpdateScoreStay = (openPopup) => {
 		dispatch(startAddingMovie(openPopup, value));
 		setOpenPopup();
+		dispatch(startLoadingViewed());
 	};
 
 	const handleClose = () => {
