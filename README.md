@@ -1,18 +1,23 @@
-# Características de la App
+# Mis Vistos
 
-La app guardará un registro de todas las películas o series que mires.
+This application allows you to save all the movies and TV series you have watched so that you can always have them at hand and recommend them (with just one click) to your friends.
 
-1. Podrás agregar esa serie o película recién vista a tu listado.
-2. Podrás calificarla con tu propio puntaje "xx tu nombre"
-3. Podrás visualizar todo lo visto y filtrarlo por nombre, plataforma y puntaje.
-4. Podrás compartirlo con tus amigos a través de WhatsApp
+## 🚀 About Me
 
-// Falta:
+I'm a Front End student and I created this application to practice React, Redux & Firebase.
 
-<!-- 1. Arreglar score en whatsapp -->
+## Features
 
-<!-- 2. Cambiar iconos en tarjeta de pelicula -->
+-   Dark Mode
+-   Create your user to save your "vistos"
+-   Responsive design
 
-3. Ver espacios después del scroll en mobile y desktop
- <!-- 4. Cuando agregamos una peli o serie no actualiza los vistos (ya estaba pero se rompio) -->
-4. Limpiar las rutas que ya no se usan
+## Tech Stack
+
+**Client:** React, Redux Toolkit, Styled-Components, Material Ui
+
+**Server:** Firebase Auth, Firebase Firestore
+
+## You can try it..
+
+-   [Mis Vistos](https:misvistos.vercel-app.com)
