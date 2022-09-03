@@ -28,6 +28,11 @@ export const ViewedCards = (item) => {
 		dispatch(startDeletingMovie(id));
 	};
 
+	const cutName = (name) => {
+		const cut = name.slice(0, 23);
+		return cut.length >= 23 ? `${cut} ....` : name;
+	};
+
 	return (
 		<Card>
 			{item.item.backdrop_path === undefined ? (
@@ -41,7 +46,9 @@ export const ViewedCards = (item) => {
 				/>
 			)}
 			<Info>
-				<Title>{item.item.name || item.item.original_title}</Title>
+				<Title>
+					{cutName(item.item.name || item.item.original_title)}
+				</Title>
 				<Score>
 					<Rating value={item.item.puntaje} readOnly size="small" />
 				</Score>
@@ -137,12 +144,6 @@ const Footer = styled.div`
 	border-radius: 0px 0px 10px 10px;
 	display: flex;
 	justify-content: space-around;
-`;
-
-const Button = styled.div`
-	color: #fff;
-	font-size: 13px;
-	cursor: pointer;
 `;
 
 const Score = styled.div`

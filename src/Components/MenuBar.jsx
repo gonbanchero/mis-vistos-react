@@ -1,11 +1,10 @@
-import * as React from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { LogoutOutlined } from '@mui/icons-material';
 import MovieIcon from '@mui/icons-material/Movie';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useNavigate } from 'react-router-dom';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../store/auth';
 import { ActiveMenu } from '../store/menubar/menuSlice';
@@ -13,7 +12,6 @@ import { ActiveMenu } from '../store/menubar/menuSlice';
 export const MenuBar = () => {
 	const activeMenu = useSelector((state) => state.menu.activeMenu);
 
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const onLogout = () => {
@@ -39,7 +37,7 @@ export const MenuBar = () => {
 			}}
 		>
 			<BottomNavigationAction
-				label="Movies"
+				label="Películas"
 				value="movies"
 				icon={<MovieIcon />}
 			/>
@@ -53,9 +51,6 @@ export const MenuBar = () => {
 				label="Add New"
 				value="addnew"
 				icon={<AddCircleIcon />}
-				// onClick={() => {
-				// 	navigate('/search');
-				// }}
 			/>
 			<BottomNavigationAction
 				label="Log Out"

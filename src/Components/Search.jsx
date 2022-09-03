@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { primary, secondary } from '../Styles/Colors';
+import { secondary } from '../Styles/Colors';
 import { useRef } from 'react';
 import { searchForMovie } from '../store/search/thunks';
 import { useDispatch } from 'react-redux';
@@ -36,6 +36,7 @@ export const Search = () => {
 						type="text"
 						ref={busqueda}
 						onKeyUp={enterHandler}
+						onFocus="return false"
 					></Input>
 					<Button onClick={handleSubmit}>Buscar</Button>
 				</Container>
@@ -65,8 +66,12 @@ const MainContainer = styled.div`
 	flex-direction: column;
 	justify-content: start;
 	align-items: center;
-	padding: 30px 0px;
+	padding: 30px 0px 120px 0px;
 	min-height: calc(100vh - 250px);
+
+	@media ${devices.mobileL} {
+		padding-bottom: 0px;
+	}
 `;
 
 const Container = styled.div`
@@ -91,28 +96,34 @@ const ListadoCards = styled.div`
 	display: grid;
 	counter-reset: grid-items;
 	position: relative;
-	grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
 	margin: 50px 0px;
-	gap: 1%;
+	gap: 1.5%;
 	max-width: 1900px;
 	width: 100%;
 	padding: 0% 10%;
 	box-sizing: border-box;
+
+	@media ${devices.tablet} {
+		gap: 0.2%;
+		margin-bottom: 200px;
+	}
+
+	@media ${devices.mobileL} {
+		gap: 0.2%;
+		margin-bottom: 150px;
+	}
 `;
 
 export const Button = styled.button`
 	background-color: ${secondary};
 	border: none;
 	padding: 10px 40px;
-	color: #000;
+	color: #fff;
 	border-radius: 4px;
 	cursor: pointer;
 	&:hover  {
-		background-color: ${primary};
+		background-color: ${secondary};
+		opacity: 0.8;
 	}
-`;
-
-const NoResults = styled.div`
-	color: #ffffff;
-	text-align: center;
 `;

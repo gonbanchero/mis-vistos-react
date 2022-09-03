@@ -7,7 +7,6 @@ import {
 	registerUserWithEmailPassword,
 	loginWithEmailPassword,
 } from '../../firebase/providers';
-import { Navigate } from 'react-router-dom';
 import { ClearSearchLogout } from '../search/searchSlice';
 import { ActiveMenu } from '../menubar/menuSlice';
 

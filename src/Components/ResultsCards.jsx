@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Imagen from '../img/contemplative-reptile.jpg';
-import { useDispatch } from 'react-redux';
 import { devices } from '../Styles/breakpoints/responsive';
 import { Link } from 'react-router-dom';
 
@@ -9,8 +8,6 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import InfoIcon from '@mui/icons-material/Info';
 
 export const ResultsCards = (props) => {
-	const dispatch = useDispatch();
-
 	const handleAdd = (item) => {
 		props.setOpenPopup(item);
 	};
